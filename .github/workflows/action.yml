@@ -1,0 +1,21 @@
+name: 'test env'
+
+on:
+  push:
+    branches: 
+      - master
+
+jobs:
+  test_env:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Checkout codes'
+      uses: actions/checkout@v2
+    - name: 'Set php'
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+    - name: 'Test env'
+      env:
+        COOKIE: ${{ secrets.COOKIE }}
+      run: php run.php
